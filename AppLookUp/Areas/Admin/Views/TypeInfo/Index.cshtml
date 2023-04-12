@@ -1,0 +1,32 @@
+﻿@model IEnumerable<TypeInfo>
+
+@{
+    ViewData["Title"] = "Loại thông tin";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Danh sách loại thông tin</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="TypeInfo" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>
+                Thêm
+            </a>
+        </div>
+    </div>
+</div>
+
+<table id="tblData" class="table table-bordered table-striped" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts{
+    <script src="~/js/type-info.js"></script>
+}

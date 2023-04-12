@@ -1,0 +1,56 @@
+﻿@model UserReqModel
+
+<form method="post" asp-action="Upsert">
+    <div class="border p-3 mt-4 row">
+        <div class="col-12 pb-2">
+            <h2 class="text-primary">@(Model.Id is null ? "Tạo" : "Chỉnh sửa") người dùng</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <input asp-for="Id" hidden />
+        <div class="mb-3 col-6">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 col-6">
+            <label asp-for="Password">Mật khẩu</label>
+            <input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Mật khẩu" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="ConfirmPassword">Xác nhận mật khẩu</label>
+            <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Xác nhận mật khẩu" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="col-6 mb-3">
+            <label asp-for="ConfirmPassword">Quyền</label>
+            <select class="form-select" asp-for="Role" asp-items="@Model.RoleList">
+                <option disabled selected>-Chọn quyền-</option>
+            </select>
+        </div>
+        <div class="col-12">
+            @if (Model.Id is null)
+            {
+                <button type="submit" class="btn btn-primary" style="width: 150px;">Lưu</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary" style="width: 150px;">Cập nhật</button>
+            }
+            <a asp-controller="User" asp-action="Index" class="btn btn-secondary" style="width: 200px;">Trờ về danh sách</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

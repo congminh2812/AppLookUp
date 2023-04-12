@@ -1,0 +1,58 @@
+﻿@model InformationVM
+@{
+    ViewData["Title"] = "Thông tin";
+}
+
+
+<form method="post" asp-action="Upsert">
+    <div class="border p-3 mt-4 row">
+        <div class="col-12 pb-2">
+            <h2 class="text-primary">@(Model.Information.Id is 0 ? "Tạo" : "Chỉnh sửa") thông tin</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <input asp-for="Information.Id" hidden />
+        <div class="mb-3 col-3">
+            <label asp-for="Information.Name"></label>
+            <input asp-for="Information.Name" class="form-control" />
+            <span asp-validation-for="Information.Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-3">
+            <label asp-for="Information.TypeInfoId"></label>
+            <select class="form-select" asp-for="Information.TypeInfoId" asp-items="@Model.ListTypeInfo">
+                <option disabled selected>-Chọn loại-</option>
+            </select>
+            <span asp-validation-for="Information.TypeInfoId" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-12">
+            <label asp-for="Information.Content"></label>
+            <textarea asp-for="Information.Content" class="form-control"></textarea>
+            <span asp-validation-for="Information.Content" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            @if (Model.Information.Id is 0)
+            {
+                <button type="submit" class="btn btn-primary" style="width: 150px;">Lưu</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary" style="width: 150px;">Cập nhật</button>
+            }
+            <a asp-controller="Information" asp-action="Index" class="btn btn-secondary" style="width: 200px;">Trờ về danh sách</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        tinymce.init({
+            selector: 'textarea',  // change this value according to your HTML
+            plugins: 'a_tinymce_plugin',
+            a_plugin_option: true,
+            a_configuration_option: 400
+        });
+    </script>
+}

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Information>
+
+@{
+    ViewData["Title"] = "Thông tin";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Danh sách thông tin</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Information" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>
+                Thêm
+            </a>
+        </div>
+    </div>
+</div>
+
+<table id="tblData" class="table table-bordered table-striped" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Loại</th>
+            <th>Nội dung</th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts{
+    <script src="~/js/information.js"></script>
+}
