@@ -1,4 +1,5 @@
-﻿using AppLookUp.Models;
+﻿using AppLookUp.Data.Repository.IRepository;
+using AppLookUp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,18 +8,28 @@ namespace AppLookUp.Web.Areas.Client.Controllers
     [Area("Client")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IUnitOfWork unitOfWork)
         {
-            _logger = logger;
+            _unitOfWork=unitOfWork;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            _logger.LogInformation("Go to Index Home");
-            return View();
+            var listInfo = await _unitOfWork.Information.GetAll(s => !s.IsDeleted);
+            return View(listInfo);
         }
 
+        #region CALL APIS
+
+        public async Task<IActionResult> GetList()
+        {
+            var data = await _unitOfWork.Information.GetTop10();
+
+            return Json(new { data });
+        }
+
+        #endregion
     }
 }

@@ -19,5 +19,12 @@ namespace AppLookUp.Data.Repository.IRepository
 
             return information;
         }
+
+        public async Task<IEnumerable<Information>> GetTop10()
+        {
+            var data = await _db.Informations.Where(s => !s.IsDeleted).Take(10).ToListAsync();
+
+            return data;
+        }
     }
 }

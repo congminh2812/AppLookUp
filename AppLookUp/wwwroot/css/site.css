@@ -1,22 +1,59 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #eee;
+}
+
+.card {
+    background-color: #fff;
+    padding: 15px;
+    border: none;
+}
+
+.input-box {
+    position: relative;
+}
+
+    .input-box i {
+        position: absolute;
+        right: 13px;
+        top: 15px;
+        color: #ced4da;
+    }
+
+.list {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    display: flex;
+}
+
+.border-bottom {
+    border-bottom: 2px solid #eee;
+}
+
+.list i {
+    font-size: 19px;
+    margin-right: 10px;
+}
+
+.list small {
+    color: #dedddd;
 }

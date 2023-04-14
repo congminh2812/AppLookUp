@@ -11,9 +11,10 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-    builder.Configuration.GetConnectionString("DefaultConnection")
+    builder.Configuration.GetConnectionString("AppLookUpConnection")
     ));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
@@ -30,6 +31,7 @@ builder.Services.ConfigureApplicationCookie(option =>
     option.LogoutPath = "/Identity/Account/Logout";
     option.AccessDeniedPath = "/Identity/Account/AccessDenied";
 });
+
 
 var app = builder.Build();
 

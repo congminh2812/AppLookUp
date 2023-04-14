@@ -57,9 +57,13 @@ namespace AppLookUp.Web.Areas.Admin.Controllers
                 }
                 else
                 {
-                    obj.UpdatedBy = User.GetUserId();
-                    _unitOfWork.Information.Update(obj);
-                    TempData["success"] = "Cập nhật loại thông tin thành công";
+                    var infor = await _unitOfWork.Information.GetFirstOrDefault(s => s.Id == obj.Id);
+                    if (infor is not null)
+                    {
+                        infor.UpdatedBy = User.GetUserId();
+                        _unitOfWork.Information.Update(infor);
+                        TempData["success"] = "Cập nhật loại thông tin thành công";
+                    }
                 }
 
                 await _unitOfWork.SaveAsync();
@@ -75,8 +79,7 @@ namespace AppLookUp.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var data = await _unitOfWork.Information.GetAll(includeProperties: "TypeInfo");
-            data = data.Where(s => !s.IsDeleted);
+            var data = await _unitOfWork.Information.GetAll(s => !s.IsDeleted, includeProperties: "TypeInfo");
 
             return Json(new { data });
         }
