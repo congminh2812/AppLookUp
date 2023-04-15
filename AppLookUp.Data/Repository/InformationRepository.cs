@@ -20,11 +20,16 @@ namespace AppLookUp.Data.Repository.IRepository
             return information;
         }
 
-        public async Task<IEnumerable<Information>> GetTop10()
+        public async Task<IEnumerable<Information>> GetTop10(string? keyword)
         {
-            var data = await _db.Informations.Where(s => !s.IsDeleted).Take(10).ToListAsync();
+            var data = _db.Informations.Where(s => !s.IsDeleted);
 
-            return data;
+            if (keyword is not null)
+                data = data.Where(s => s.Name.ToLower().Contains(keyword.ToLower()));
+
+            data = data.Take(10);
+
+            return await data.ToListAsync();
         }
     }
 }

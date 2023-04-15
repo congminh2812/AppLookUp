@@ -57,3 +57,17 @@ body {
 .list small {
     color: #dedddd;
 }
+
+.loading {
+    width: 100%;
+    height: inherit;
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+a {
+    cursor: pointer;
+}

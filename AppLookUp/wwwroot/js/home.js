@@ -1,17 +1,26 @@
 ﻿
 $(document).ready(function () {
+    loadData("");
+
     $("#search").on('input', $.debounce(400, function (event) {
         loadData(event.target.value);
     }));
 });
 
 function loadData(keyword) {
-    $("#list").html(`<div class="spinner-border text-primary" role="status">
-                <span class= "visually-hidden">Loading...</span>
-            </div>`);
+    $("#content").html('');
+    ShowLoading();
 
     $.get(`/Client/Home/GetList?keyword=${keyword}`, function (data, status) {
         let html = '';
+    
+
+        if (!data || data.data.length == 0)
+            html = `
+                <div class="alert alert-primary mt-2" role="alert">
+                  Không có dữ liệu !
+                </div>
+            `;
 
         for (let item of data.data) {
             html += `
@@ -25,6 +34,18 @@ function loadData(keyword) {
             `;
         }
 
-        $("#list").html(html);
+        $("#content").html(html);
+        HiddenLoading();
+    }).fail(function () {
+        toastr.error("Quá trình xử lý đã có lỗi xảy ra!");
+        HiddenLoading();
     });
+}
+
+function ShowLoading() {
+    $("#loading").removeClass('hidden');
+}
+
+function HiddenLoading() {
+    $("#loading").addClass('hidden');
 }

@@ -23,9 +23,9 @@ namespace AppLookUp.Web.Areas.Client.Controllers
 
         #region CALL APIS
 
-        public async Task<IActionResult> GetList()
+        public async Task<IActionResult> GetList(string? keyword)
         {
-            var data = await _unitOfWork.Information.GetTop10();
+            var data = await _unitOfWork.Information.GetTop10(keyword);
 
             return Json(new { data });
         }
