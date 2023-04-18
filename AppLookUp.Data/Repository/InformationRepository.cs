@@ -27,7 +27,8 @@ namespace AppLookUp.Data.Repository.IRepository
             if (keyword is not null)
                 data = data.Where(s => s.Name.ToLower().Contains(keyword.ToLower()));
 
-            data = data.Take(10);
+            if (data.Count() > 10)
+                data = data.Take(10);
 
             return await data.ToListAsync();
         }

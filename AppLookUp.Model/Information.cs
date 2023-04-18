@@ -33,7 +33,7 @@ namespace AppLookUp.Models
         [ValidateNever]
         public AppUser CreatedUser { get; set; }
 
-        public DateTime UpdatedTime { get; set; }
+        public DateTime? UpdatedTime { get; set; }
 
         public string? UpdatedBy { get; set; }
         [ForeignKey("UpdatedBy")]

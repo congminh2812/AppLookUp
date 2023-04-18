@@ -1,7 +1,5 @@
 ﻿using AppLookUp.Data.Repository.IRepository;
-using AppLookUp.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace AppLookUp.Web.Areas.Client.Controllers
 {
@@ -17,8 +15,7 @@ namespace AppLookUp.Web.Areas.Client.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var listInfo = await _unitOfWork.Information.GetAll(s => !s.IsDeleted);
-            return View(listInfo);
+            return View();
         }
 
         #region CALL APIS

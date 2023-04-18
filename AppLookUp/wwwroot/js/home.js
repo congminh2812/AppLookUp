@@ -23,17 +23,21 @@ function loadData(keyword) {
             `;
 
         for (let item of data.data) {
+            let content = item.content.split(" <p>")[0];
+            let subContent = content.substring(0, content.length > 100 ? 100 : content.length);
+
             html += `
                 <div class="list border-bottom">
                     <i class="bi bi-bookmark-fill text-primary"></i>
                     <div class="d-flex flex-column ml-3">
                         <a class="text-hover-primary"><strong>${item.name}</strong></a>
-                        <small>${item.content.substring(0, item.content.length > 100 ? 100 : item.content.length)}</small>
+                        <small>${subContent}</small>
                     </div>
                  </div>
             `;
         }
 
+        console.log(html);
         $("#content").html(html);
         HiddenLoading();
     }).fail(function () {

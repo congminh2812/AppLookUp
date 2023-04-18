@@ -61,8 +61,12 @@ namespace AppLookUp.Web.Areas.Admin.Controllers
                     if (infor is not null)
                     {
                         infor.UpdatedBy = User.GetUserId();
+                        infor.Name = obj.Name;
+                        infor.Content = obj.Content;
+                        infor.TypeInfoId = obj.TypeInfoId;
+
                         _unitOfWork.Information.Update(infor);
-                        TempData["success"] = "Cập nhật loại thông tin thành công";
+                        TempData["success"] = "Cập nhật thông tin thành công";
                     }
                 }
 
