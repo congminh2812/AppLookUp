@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Component";
+}
+
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center ">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="input-box">
+                    <input id="search" type="text" class="form-control" placeholder="Nhập từ khóa để tìm kiếm">
+                    <i class="fa fa-search"></i>
+                </div>
+
+                <div id="list" style="min-height: 400px; width: 100%;">
+                    <div id="loading" class="loading d-flex justify-content-center align-items-center hidden">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <div id="content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/client/component.js"></script>
+}

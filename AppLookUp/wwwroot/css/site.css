@@ -60,7 +60,7 @@ body {
 
 .loading {
     width: 100%;
-    height: inherit;
+    min-height: inherit;
     text-align: center;
 }
 
