@@ -12,6 +12,7 @@ namespace AppMVC.DataAccess.Repository
         public ITypeInfoRepository TypeInfo { get; private set; }
         public IInformationRepository Information { get; private set; }
         public IAppUserRepository AppUser { get; private set; }
+        public IComponentRepository Component { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db,
               UserManager<IdentityUser> userManager,
@@ -21,6 +22,7 @@ namespace AppMVC.DataAccess.Repository
             TypeInfo = new TypeInfoRepository(db);
             Information = new InformationRepository(db);
             AppUser = new AppUserRepository(db, userManager, roleManager);
+            Component = new ComponentRepository(db);
         }
 
         public async Task<T> Delete<T>(T entity)

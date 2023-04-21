@@ -13,6 +13,7 @@ namespace AppLookUp.Data.Data
         public DbSet<TypeInfo> TypeInfos { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Information> Informations { get; set; }
+        public DbSet<Component> Components { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

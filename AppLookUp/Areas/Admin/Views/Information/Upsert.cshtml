@@ -3,33 +3,37 @@
     ViewData["Title"] = "Thông tin";
 }
 
-
 <form method="post" asp-action="Upsert">
-    <div class="border p-3 mt-4 row">
-        <div class="col-12 pb-2">
+    <div class="card border-primary mt-3">
+        <div class="card-header">
             <h2 class="text-primary">@(Model.Information.Id is 0 ? "Tạo" : "Chỉnh sửa") thông tin</h2>
-            <hr />
         </div>
-        <div asp-validation-summary="All"></div>
-        <input asp-for="Information.Id" hidden />
-        <div class="mb-3 col-3">
-            <label asp-for="Information.Name"></label>
-            <input asp-for="Information.Name" class="form-control" />
-            <span asp-validation-for="Information.Name" class="text-danger"></span>
+        <div class="card-body">
+            <div class="border p-3 mt-4 row">
+                <div asp-validation-summary="All"></div>
+                <input asp-for="Information.Id" hidden />
+                <div class="mb-3 col-3">
+                    <label asp-for="Information.Name"></label>
+                    <input asp-for="Information.Name" class="form-control" />
+                    <span asp-validation-for="Information.Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3 col-3">
+                    <label asp-for="Information.TypeInfoId"></label>
+                    <select class="form-select" asp-for="Information.TypeInfoId" asp-items="@Model.ListTypeInfo">
+                        <option disabled selected>-Chọn loại-</option>
+                    </select>
+                    <span asp-validation-for="Information.TypeInfoId" class="text-danger"></span>
+                </div>
+                <div class="mb-3 col-12">
+                    <label asp-for="Information.Content"></label>
+                    <textarea asp-for="Information.Content" class="form-control"></textarea>
+                    <span asp-validation-for="Information.Content" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                </div>
+            </div>
         </div>
-        <div class="mb-3 col-3">
-            <label asp-for="Information.TypeInfoId"></label>
-            <select class="form-select" asp-for="Information.TypeInfoId" asp-items="@Model.ListTypeInfo">
-                <option disabled selected>-Chọn loại-</option>
-            </select>
-            <span asp-validation-for="Information.TypeInfoId" class="text-danger"></span>
-        </div>
-        <div class="mb-3 col-12">
-            <label asp-for="Information.Content"></label>
-            <textarea asp-for="Information.Content" class="form-control"></textarea>
-            <span asp-validation-for="Information.Content" class="text-danger"></span>
-        </div>
-        <div class="col-12">
+        <div class="card-footer">
             @if (Model.Information.Id is 0)
             {
                 <button type="submit" class="btn btn-primary" style="width: 150px;">Lưu</button>
@@ -42,6 +46,7 @@
         </div>
     </div>
 </form>
+
 
 @section Scripts {
     @{

@@ -72,7 +72,7 @@ namespace AppLookUp.Web.Areas.Admin.Controllers
 
                 await _unitOfWork.SaveAsync();
 
-                return View("Index");
+                return RedirectToAction("Index");
             }
 
             return View(viewModel);

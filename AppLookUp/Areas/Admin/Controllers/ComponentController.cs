@@ -8,11 +8,11 @@ namespace AppLookUp.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = RoleConstant.Role_Admin)]
-    public class TypeInfoController : Controller
+    public class ComponentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public TypeInfoController(IUnitOfWork unitOfWork)
+        public ComponentController(IUnitOfWork unitOfWork)
         {
             _unitOfWork=unitOfWork;
         }
@@ -24,26 +24,26 @@ namespace AppLookUp.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Upsert(int? id)
         {
-            var data = await _unitOfWork.TypeInfo.GetUpsert(id);
+            var data = await _unitOfWork.Component.GetUpsert(id);
 
             return View(data);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Upsert(TypeInfo obj)
+        public async Task<IActionResult> Upsert(Component obj)
         {
             if (ModelState.IsValid)
             {
                 if (obj.Id is 0)
                 {
-                    _unitOfWork.TypeInfo.Add(obj);
-                    TempData["success"] = "Tạo loại thông tin thành công";
+                    _unitOfWork.Component.Add(obj);
+                    TempData["success"] = "Tạo component thành công";
                 }
                 else
                 {
-                    _unitOfWork.TypeInfo.Update(obj);
-                    TempData["success"] = "Cập nhật loại thông tin thành công";
+                    _unitOfWork.Component.Update(obj);
+                    TempData["success"] = "Cập nhật component thành công";
                 }
 
                 await _unitOfWork.SaveAsync();
@@ -59,7 +59,7 @@ namespace AppLookUp.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var data = await _unitOfWork.TypeInfo.GetAll();
+            var data = await _unitOfWork.Component.GetAll();
 
             return Json(new { data });
         }
@@ -67,12 +67,12 @@ namespace AppLookUp.Web.Areas.Admin.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            var TypeInfo = await _unitOfWork.TypeInfo.GetFirstOrDefault(x => x.Id == id);
+            var Component = await _unitOfWork.Component.GetFirstOrDefault(x => x.Id == id);
 
-            if (TypeInfo is null)
-                return Json(new { success = false, message = "Không tìm thấy loại thông tin" });
+            if (Component is null)
+                return Json(new { success = false, message = "Không tìm thấy component" });
 
-            await _unitOfWork.Delete(TypeInfo);
+            await _unitOfWork.Delete(Component);
             await _unitOfWork.SaveAsync();
 
             return Json(new { success = true, message = "Xóa thành công" });

@@ -1,17 +1,17 @@
-﻿@model IEnumerable<TypeInfo>
+﻿@model IEnumerable<Component>
 
 @{
-    ViewData["Title"] = "Loại thông tin";
+    ViewData["Title"] = "Component";
 }
 
 <div class="card border-primary mt-3">
     <div class="card-header">
         <div class="row">
             <div class="col-6">
-                <h2 class="text-primary">Danh sách loại thông tin</h2>
+                <h2 class="text-primary">Danh sách component</h2>
             </div>
             <div class="col-6 text-end">
-                <a asp-controller="TypeInfo" asp-action="Upsert" class="btn btn-primary">
+                <a asp-controller="Component" asp-action="Upsert" class="btn btn-primary">
                     <i class="bi bi-plus-circle"></i>
                     Thêm
                 </a>
@@ -24,6 +24,7 @@
             <thead>
                 <tr>
                     <th>Tên</th>
+                    <th>Nội dung</th>
                     <th></th>
                 </tr>
             </thead>
@@ -31,6 +32,7 @@
 
     </div>
 </div>
+
 @section Scripts{
-    <script src="~/js/type-info.js"></script>
+    <script src="~/js/component.js"></script>
 }
